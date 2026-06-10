@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>단어 시험 준비 (모바일)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>📚 단어 시험 준비</h1>
+      <p class="subtitle">카드 게임으로 단어를 외워보세요</p>
+    </header>
+
+    <section id="phase-setup" class="phase active">
+      <div class="panel">
+        <h2>⚙️ 학습 설정</h2>
+        <div class="field-toggles">
+          <label class="toggle-label">
+            <input type="checkbox" id="field-korean" checked>
+            <span>한글 뜻</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="field-english">
+            <span>영어 뜻</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="field-example">
+            <span>영어 예시문장</span>
+          </label>
+        </div>
+        <div class="timer-settings">
+          <label class="toggle-label">
+            <input type="checkbox" id="timer-enabled">
+            <span>제한 시간 사용</span>
+          </label>
+          <div class="timer-input-group" id="timer-input-group" hidden>
+            <label for="timer-seconds">라운드당 제한 시간 (초)</label>
+            <input type="number" id="timer-seconds" min="30" max="600" value="120">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>📝 단어 입력</h2>
+        <div class="input-grid" id="input-grid">
+          <div class="input-card">
+            <label for="input-word">영어 단어 <span class="required">*</span></label>
+            <input type="text" id="input-word" placeholder="예: apple" autocomplete="off" enterkeyhint="next">
+          </div>
+          <div class="input-card" data-field="korean">
+            <label for="input-korean">한글 뜻</label>
+            <input type="text" id="input-korean" placeholder="예: 사과" autocomplete="off" enterkeyhint="next">
+          </div>
+          <div class="input-card" data-field="english" hidden>
+            <label for="input-english">영어 뜻</label>
+            <input type="text" id="input-english" placeholder="예: a round fruit" autocomplete="off">
+          </div>
+          <div class="input-card" data-field="example" hidden>
+            <label for="input-example">영어 예시문장</label>
+            <input type="text" id="input-example" placeholder="예: I eat an apple." autocomplete="off">
+          </div>
+        </div>
+        <p id="form-feedback" class="form-feedback" hidden></p>
+        <button type="button" class="btn btn-secondary" id="btn-add-word">+ 단어 추가</button>
+      </div>
+
+      <div class="panel" id="word-list-panel" hidden>
+        <div class="panel-header">
+          <h2>📋 단어 목록 <span class="badge" id="word-count">0</span></h2>
+          <button type="button" class="btn btn-text btn-danger-text" id="btn-clear-words">전체 삭제</button>
+        </div>
+        <ul class="word-list" id="word-list"></ul>
+      </div>
+
+      <div class="panel">
+        <h2>💾 프리셋</h2>
+        <div class="preset-save-row">
+          <input type="text" id="preset-name" placeholder="프리셋 이름 (예: 3학년 1반)" autocomplete="off">
+          <button type="button" class="btn btn-secondary" id="btn-save-preset">저장</button>
+        </div>
+        <div class="preset-list" id="preset-list">
+          <p class="empty-hint">저장된 프리셋이 없습니다.</p>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button type="button" class="btn btn-primary btn-large" id="btn-start" disabled>학습 시작</button>
+      </div>
+    </section>
+
+    <section id="phase-round" class="phase">
+      <div class="round-header">
+        <div class="round-info">
+          <span class="round-label" id="round-label">라운드 1</span>
+          <span class="round-title" id="round-title">페어 찾기</span>
+        </div>
+        <div class="stats-bar">
+          <div class="stat">
+            <span class="stat-label">진행</span>
+            <span class="stat-value" id="progress-text">0 / 0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">점수</span>
+            <span class="stat-value" id="score-text">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">정답률</span>
+            <span class="stat-value" id="accuracy-text">-</span>
+          </div>
+          <div class="stat stat-timer" id="stat-timer" hidden>
+            <span class="stat-label">남은 시간</span>
+            <span class="stat-value timer-value" id="timer-text">2:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="round1-content" class="round-content" hidden>
+        <p class="round-hint">영어 카드와 뜻 카드를 차례로 눌러 짝을 맞추세요. (한 번에 최대 4쌍)</p>
+        <div class="match-grid" id="match-grid"></div>
+      </div>
+
+      <div id="round2-content" class="round-content" hidden>
+        <p class="round-hint">아래 뜻에 맞는 영어 단어를 고르세요.</p>
+        <div class="quiz-prompt" id="quiz-prompt"></div>
+        <div class="quiz-choices" id="quiz-choices"></div>
+      </div>
+
+      <div id="round3-content" class="round-content" hidden>
+        <p class="round-hint">글자를 순서대로 눌러 스펠링을 완성하세요.</p>
+        <div class="spelling-hint" id="spelling-hint"></div>
+        <div class="spelling-answer" id="spelling-answer"></div>
+        <div class="spelling-letters" id="spelling-letters"></div>
+        <button type="button" class="btn btn-secondary" id="btn-spelling-reset">다시 선택</button>
+      </div>
+    </section>
+
+    <section id="phase-result" class="phase">
+      <div class="panel result-panel">
+        <h2 id="result-title">🎉 학습 완료!</h2>
+        <div class="result-stats">
+          <div class="result-stat">
+            <span class="result-stat-value" id="result-score">0</span>
+            <span class="result-stat-label">총 점수</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-value" id="result-accuracy">0%</span>
+            <span class="result-stat-label">정답률</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-value" id="result-correct">0</span>
+            <span class="result-stat-label">정답</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-value" id="result-wrong">0</span>
+            <span class="result-stat-label">오답</span>
+          </div>
+        </div>
+        <div id="wrong-words-section" class="wrong-words-section" hidden>
+          <h3>틀린 단어</h3>
+          <ul class="wrong-words-list" id="wrong-words-list"></ul>
+        </div>
+        <div class="action-bar result-actions">
+          <button type="button" class="btn btn-primary" id="btn-retry-wrong" hidden>틀린 단어만 다시 풀기</button>
+          <button type="button" class="btn btn-secondary" id="btn-restart">처음부터 다시</button>
+          <button type="button" class="btn btn-secondary" id="btn-back-setup">단어 목록으로</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast" hidden></div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
