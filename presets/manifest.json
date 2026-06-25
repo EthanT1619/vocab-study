@@ -1,8 +1,29 @@
-[
-  {
-    "id": "week1",
-    "name": "예시 단어 (4개)",
-    "file": "week1.json",
-    "description": "테스트용 샘플 목록"
-  }
-]
+{
+  "levels": [
+    { "id": "DSA", "name": "DSA", "lessons": [] },
+    { "id": "DSB", "name": "DSB", "lessons": [] },
+    {
+      "id": "DSC",
+      "name": "DSC",
+      "lessons": [
+        {
+          "id": "lesson-5",
+          "name": "Lesson 5",
+          "lists": [
+            { "name": "Vocab 1", "file": "DSC/Lesson 5/vocab1.json" },
+            { "name": "Vocab 2", "file": "DSC/Lesson 5/vocab2.json" }
+          ]
+        },
+        {
+          "id": "lesson-6",
+          "name": "Lesson 6",
+          "file": "DSC/Lesson 6/words.json"
+        }
+      ]
+    },
+    { "id": "DSD", "name": "DSD", "lessons": [] },
+    { "id": "LSA", "name": "LSA", "lessons": [] },
+    { "id": "LSB", "name": "LSB", "lessons": [] },
+    { "id": "LSC", "name": "LSC", "lessons": [] }
+  ]
+}

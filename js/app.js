@@ -389,30 +389,129 @@ function applyWordSet(wordList, options = {}) {
   return true;
 }
 
-let builtInPresets = [];
+let builtInLevels = [];
+let builtInBrowseLevel = null;
+let builtInBrowseLesson = null;
 
-function renderBuiltInPresets() {
+function getBuiltInLoadItems(lesson) {
+  if (lesson?.lists?.length) return lesson.lists;
+  if (lesson?.file) return [lesson];
+  return [];
+}
+
+function renderBuiltInBrowser() {
   const container = $('#builtin-preset-list');
+  const breadcrumb = $('#builtin-preset-breadcrumb');
   if (!container) return;
 
-  if (builtInPresets.length === 0) {
-    container.innerHTML = '<p class="empty-hint">등록된 학원 단어 목록이 없습니다.</p>';
+  if (!builtInBrowseLevel) {
+    builtInBrowseLesson = null;
+    if (breadcrumb) breadcrumb.hidden = true;
+
+    if (builtInLevels.length === 0) {
+      container.innerHTML = '<p class="empty-hint">등록된 학원 단어 목록이 없습니다.</p>';
+      return;
+    }
+
+    container.className = 'builtin-preset-list builtin-folder-grid';
+    container.innerHTML = builtInLevels.map((level, i) => {
+      const lessonCount = level.lessons?.length || 0;
+      return `
+        <button type="button" class="builtin-folder-item" data-level-idx="${i}">
+          <span class="builtin-folder-name">${escapeHtml(level.name)}</span>
+          <span class="builtin-folder-meta">${lessonCount}개 레슨</span>
+        </button>`;
+    }).join('');
+
+    container.querySelectorAll('[data-level-idx]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        builtInBrowseLevel = builtInLevels[parseInt(btn.dataset.levelIdx, 10)];
+        builtInBrowseLesson = null;
+        renderBuiltInBrowser();
+      });
+    });
     return;
   }
 
-  container.innerHTML = builtInPresets.map((entry, i) => `
-    <div class="builtin-preset-item">
-      <div class="builtin-preset-item-info">
-        <div class="builtin-preset-item-name">${escapeHtml(entry.name)}</div>
-        ${entry.description ? `<div class="builtin-preset-item-meta">${escapeHtml(entry.description)}</div>` : ''}
-      </div>
-      <button type="button" class="btn btn-secondary btn-small" data-builtin-idx="${i}">불러오기</button>
-    </div>
-  `).join('');
+  if (breadcrumb) {
+    breadcrumb.hidden = false;
+    if (builtInBrowseLesson) {
+      breadcrumb.innerHTML = `
+        <button type="button" class="btn btn-text btn-small" id="btn-builtin-back">← ${escapeHtml(builtInBrowseLevel.name)}</button>
+        <span class="builtin-preset-path">${escapeHtml(builtInBrowseLevel.name)} / ${escapeHtml(builtInBrowseLesson.name)}</span>`;
+      $('#btn-builtin-back')?.addEventListener('click', () => {
+        builtInBrowseLesson = null;
+        renderBuiltInBrowser();
+      });
+    } else {
+      breadcrumb.innerHTML = `
+        <button type="button" class="btn btn-text btn-small" id="btn-builtin-back">← 레벨 목록</button>
+        <span class="builtin-preset-path">${escapeHtml(builtInBrowseLevel.name)}</span>`;
+      $('#btn-builtin-back')?.addEventListener('click', () => {
+        builtInBrowseLevel = null;
+        builtInBrowseLesson = null;
+        renderBuiltInBrowser();
+      });
+    }
+  }
 
-  container.querySelectorAll('[data-builtin-idx]').forEach((btn) => {
+  if (builtInBrowseLesson) {
+    const items = getBuiltInLoadItems(builtInBrowseLesson);
+    container.className = 'builtin-preset-list';
+
+    if (items.length === 0) {
+      container.innerHTML = '<p class="empty-hint">등록된 단어 목록이 없습니다.</p>';
+      return;
+    }
+
+    container.innerHTML = items.map((entry, i) => `
+      <div class="builtin-preset-item">
+        <div class="builtin-preset-item-info">
+          <div class="builtin-preset-item-name">${escapeHtml(entry.name)}</div>
+          ${entry.description ? `<div class="builtin-preset-item-meta">${escapeHtml(entry.description)}</div>` : ''}
+        </div>
+        <button type="button" class="btn btn-secondary btn-small" data-list-idx="${i}">불러오기</button>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('[data-list-idx]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        loadBuiltInPreset(items[parseInt(btn.dataset.listIdx, 10)]);
+      });
+    });
+    return;
+  }
+
+  const lessons = builtInBrowseLevel.lessons || [];
+  container.className = 'builtin-preset-list';
+
+  if (lessons.length === 0) {
+    container.innerHTML = '<p class="empty-hint">등록된 레슨이 없습니다.</p>';
+    return;
+  }
+
+  container.innerHTML = lessons.map((lesson, i) => {
+    const listCount = lesson.lists?.length || (lesson.file ? 1 : 0);
+    const actionLabel = lesson.lists?.length ? '열기' : '불러오기';
+    return `
+      <div class="builtin-preset-item">
+        <div class="builtin-preset-item-info">
+          <div class="builtin-preset-item-name">${escapeHtml(lesson.name)}</div>
+          <div class="builtin-preset-item-meta">${listCount}개 목록</div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-small" data-lesson-idx="${i}">${actionLabel}</button>
+      </div>`;
+  }).join('');
+
+  container.querySelectorAll('[data-lesson-idx]').forEach((btn) => {
     btn.addEventListener('click', () => {
-      loadBuiltInPreset(builtInPresets[parseInt(btn.dataset.builtinIdx, 10)]);
+      const lesson = lessons[parseInt(btn.dataset.lessonIdx, 10)];
+      if (lesson.lists?.length) {
+        builtInBrowseLesson = lesson;
+        renderBuiltInBrowser();
+        return;
+      }
+      loadBuiltInPreset(lesson);
     });
   });
 }
@@ -425,8 +524,10 @@ async function loadBuiltInManifest() {
     const res = await fetch(`${PRESETS_BASE}manifest.json`);
     if (!res.ok) throw new Error('manifest not found');
     const data = await res.json();
-    builtInPresets = Array.isArray(data) ? data : [];
-    renderBuiltInPresets();
+    builtInLevels = data.levels || [];
+    builtInBrowseLevel = null;
+    builtInBrowseLesson = null;
+    renderBuiltInBrowser();
   } catch {
     container.innerHTML = '<p class="empty-hint">학원 단어 목록을 불러올 수 없습니다.</p>';
   }

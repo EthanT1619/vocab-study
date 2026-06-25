@@ -352,6 +352,56 @@ body::before {
   gap: 8px;
 }
 
+.builtin-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.builtin-folder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 88px;
+  padding: 14px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.builtin-folder-item:hover {
+  background: #eef2ff;
+  border-color: var(--primary);
+}
+
+.builtin-folder-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.builtin-folder-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.builtin-preset-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.builtin-preset-path {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
 .builtin-preset-item {
   display: flex;
   justify-content: space-between;
