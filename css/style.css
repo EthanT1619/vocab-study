@@ -49,14 +49,38 @@ body::before {
 }
 
 .header {
+  position: relative;
   text-align: center;
   margin-bottom: 28px;
+  padding-top: 4px;
 }
 
-.header h1 {
+.header-title h1 {
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 4px;
+}
+
+.btn-header-home {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-header-home:hover {
+  background: #eef2ff;
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .subtitle {

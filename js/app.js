@@ -129,6 +129,21 @@ function showToast(msg, type = 'info') {
 function showPhase(phase) {
   [phaseSetup, phaseRound, phaseResult].forEach((el) => el.classList.remove('active'));
   phase.classList.add('active');
+  updateHeaderHomeButton();
+}
+
+function updateHeaderHomeButton() {
+  const btn = $('#btn-header-home');
+  if (!btn) return;
+  const inGame = phaseRound.classList.contains('active') || phaseResult.classList.contains('active');
+  btn.hidden = !inGame;
+}
+
+function goHomeFromGame() {
+  if (phaseRound.classList.contains('active')) {
+    if (!confirm('학습을 중단하고 단어 목록으로 돌아갈까요?')) return;
+  }
+  resetToSetup();
 }
 
 function formatTime(sec) {
@@ -1118,6 +1133,7 @@ function init() {
   $('#btn-retry-wrong').addEventListener('click', retryWrongWords);
   $('#btn-restart').addEventListener('click', restartGame);
   $('#btn-back-setup').addEventListener('click', resetToSetup);
+  $('#btn-header-home').addEventListener('click', goHomeFromGame);
 
   updateFieldVisibility();
   renderPresets();
