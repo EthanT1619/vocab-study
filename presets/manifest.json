@@ -22,7 +22,15 @@
       ]
     },
     { "id": "DSD", "name": "DSD", "lessons": [] },
-    { "id": "LSA", "name": "LSA", "lessons": [] },
+    { "id": "LSA", "name": "LSA", "lessons": [
+      {
+        "id": "lesson-2",
+        "name": "Lesson 2",
+        "lists": [
+          { "name": "Vocab 4", "file": "LSA/Lesson 2/vocab4.json" }
+        ]
+      }
+    ] },
     { "id": "LSB", "name": "LSB", "lessons": [] },
     { "id": "LSC", "name": "LSC", "lessons": [] }
   ]
