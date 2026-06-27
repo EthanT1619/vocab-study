@@ -172,7 +172,43 @@ const SFX = {
   correct: 'assets/correct.mp3',
   wrong: 'assets/wrong.mp3',
 };
+const SFX_TTS_START_RATIO = 0.8;
+const sfxDurationMs = { correct: 950, wrong: 950 };
 let audioUnlocked = false;
+let activeSfxAudio = null;
+let pendingSpeakTimer = null;
+
+function primeSpeechVoices() {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.getVoices();
+}
+
+function preloadSfx() {
+  Object.entries(SFX).forEach(([key, src]) => {
+    const probe = new Audio(src);
+    probe.preload = 'auto';
+    probe.addEventListener('loadedmetadata', () => {
+      if (probe.duration && Number.isFinite(probe.duration)) {
+        sfxDurationMs[key] = Math.ceil(probe.duration * 1000);
+      }
+    }, { once: true });
+    probe.load();
+  });
+}
+
+function clearPendingSpeak() {
+  if (pendingSpeakTimer) {
+    clearTimeout(pendingSpeakTimer);
+    pendingSpeakTimer = null;
+  }
+}
+
+function stopActiveSfx() {
+  if (activeSfxAudio) {
+    activeSfxAudio.pause();
+    activeSfxAudio = null;
+  }
+}
 
 function unlockAudio() {
   if (audioUnlocked) return;
@@ -182,26 +218,99 @@ function unlockAudio() {
     probe.volume = 0.001;
     probe.play().then(() => probe.pause()).catch(() => {});
   });
+  primeSpeechVoices();
+  preloadSfx();
+  window.speechSynthesis?.addEventListener('voiceschanged', primeSpeechVoices, { once: true });
+}
+
+function warmSpeechInGesture() {
+  primeSpeechVoices();
+}
+
+function speakEnglish(text) {
+  if (!text?.trim() || !('speechSynthesis' in window)) return;
+
+  unlockAudio();
+  primeSpeechVoices();
+
+  const synth = window.speechSynthesis;
+  const phrase = text.trim();
+
+  if (synth.speaking) {
+    synth.cancel();
+  }
+
+  const voices = synth.getVoices();
+  const voice = voices.find((v) => v.lang.startsWith('en-US')) || voices.find((v) => v.lang.startsWith('en'));
+
+  const utter = new SpeechSynthesisUtterance(phrase);
+  utter.lang = 'en-US';
+  utter.rate = 0.9;
+  utter.volume = 1;
+  if (voice) utter.voice = voice;
+
+  synth.speak(utter);
 }
 
 function playSfx(type) {
   const src = SFX[type];
-  if (!src) return;
+  if (!src) return null;
   const audio = new Audio(src);
   audio.play().catch(() => {});
+  return audio;
 }
 
-function recordCorrect() {
+function playSfxThenSpeak(sfxType, speakText) {
+  const phrase = speakText?.trim();
+  unlockAudio();
+  primeSpeechVoices();
+  clearPendingSpeak();
+  stopActiveSfx();
+
+  const src = SFX[sfxType];
+  if (src) {
+    const audio = new Audio(src);
+    activeSfxAudio = audio;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  }
+
+  if (!phrase) return;
+
+  const fullMs = sfxDurationMs[sfxType] || 950;
+  const delayMs = Math.ceil(fullMs * SFX_TTS_START_RATIO);
+  // Schedule in the click turn (not in audio "ended") so Chrome still allows TTS.
+  pendingSpeakTimer = setTimeout(() => {
+    pendingSpeakTimer = null;
+    speakEnglish(phrase);
+  }, delayMs);
+}
+
+function getWordTextById(wordId) {
+  const entry = gameWords.find((w) => w.id === wordId) || words.find((w) => w.id === wordId);
+  return entry?.word || '';
+}
+
+function recordCorrect(speakText) {
   correctCount++;
   addScore(10);
-  playSfx('correct');
+  if (speakText) {
+    playSfxThenSpeak('correct', speakText);
+  } else {
+    playSfx('correct');
+  }
   updateStats(null, null);
 }
 
-function recordWrong(wordId) {
+function recordWrong(wordId, speakText) {
   wrongCount++;
   wrongWordIds.add(wordId);
-  playSfx('wrong');
+  const phrase = speakText || getWordTextById(wordId);
+  if (phrase) {
+    playSfxThenSpeak('wrong', phrase);
+  } else {
+    playSfx('wrong');
+  }
   updateStats(null, null);
 }
 
@@ -687,6 +796,8 @@ function startGame(retryOnly = false) {
   wrongCount = 0;
   if (!retryOnly) wrongWordIds = new Set();
 
+  primeSpeechVoices();
+
   currentRound = 1;
   showPhase(phaseRound);
   startRound1();
@@ -694,6 +805,9 @@ function startGame(retryOnly = false) {
 
 function resetToSetup() {
   stopTimer();
+  clearPendingSpeak();
+  stopActiveSfx();
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
   showPhase(phaseSetup);
   isRetryMode = false;
 }
@@ -813,11 +927,12 @@ function onMatchCardClick(el) {
   const isMatch = isWordMeaningPair && first.card.wordId === card.wordId;
 
   if (isMatch) {
+    const wordCard = first.card.type === 'word' ? first.card : card;
     first.el.classList.add('matched');
     el.classList.add('matched');
     batchMatchedCount++;
     completedPairs++;
-    recordCorrect();
+    recordCorrect(wordCard.text);
     updateStats(completedPairs, totalPairs);
     showToast('정답!', 'success');
 
@@ -923,10 +1038,10 @@ function onQuizChoice(btn) {
   });
 
   if (isCorrect) {
-    recordCorrect();
+    recordCorrect(currentQuiz.word.word);
     showToast('정답!', 'success');
   } else {
-    recordWrong(wordId);
+    recordWrong(wordId, currentQuiz.word.word);
     showToast(`오답! 정답: ${currentQuiz.word.word}`, 'error');
   }
 
@@ -979,7 +1094,10 @@ function renderSpelling(reshuffle = true) {
   const hintText = w[spellingHintField] || '';
 
   let hintHtml = hintText
-    ? `<strong>${FIELD_LABELS[spellingHintField]}</strong>: ${escapeHtml(hintText)}`
+    ? `<div class="spelling-hint-main">
+        <span><strong>${FIELD_LABELS[spellingHintField]}</strong>: ${escapeHtml(hintText)}</span>
+        <button type="button" class="btn-speak-word" id="btn-spelling-speak" aria-label="단어 발음 듣기" title="단어 발음 듣기">🔊</button>
+      </div>`
     : '글자를 순서대로 눌러 단어를 완성하세요.';
 
   if (currentSpelling.partTotal > 1) {
@@ -987,6 +1105,9 @@ function renderSpelling(reshuffle = true) {
   }
 
   $('#spelling-hint').innerHTML = hintHtml;
+  $('#btn-spelling-speak')?.addEventListener('click', () => {
+    speakEnglish(currentSpelling.spellingText);
+  });
 
   renderSpellingSlots();
 
@@ -1034,11 +1155,11 @@ function checkSpelling() {
   const correct = currentSpelling.spellingText;
 
   if (answer.toLowerCase() === correct.toLowerCase()) {
-    recordCorrect();
+    recordCorrect(currentSpelling.spellingText);
     showToast('정답!', 'success');
     setTimeout(showNextSpelling, 800);
   } else {
-    recordWrong(currentSpelling.wordEntry.id);
+    recordWrong(currentSpelling.wordEntry.id, currentSpelling.spellingText);
     showToast(`오답! 정답: ${correct}`, 'error');
     setTimeout(showNextSpelling, 1200);
   }
@@ -1084,15 +1205,20 @@ function showResults() {
 }
 
 function retryWrongWords() {
+  unlockAudio();
+  warmSpeechInGesture();
   startGame(true);
 }
 
 function restartGame() {
+  unlockAudio();
+  warmSpeechInGesture();
   startGame(false);
 }
 
 // ─── 이벤트 바인딩 ───
 function init() {
+  preloadSfx();
   document.addEventListener('click', unlockAudio, { once: true });
   document.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
 
@@ -1126,7 +1252,11 @@ function init() {
   });
 
   $('#btn-save-preset').addEventListener('click', savePreset);
-  $('#btn-start').addEventListener('click', () => startGame(false));
+  $('#btn-start').addEventListener('click', () => {
+    unlockAudio();
+    warmSpeechInGesture();
+    startGame(false);
+  });
 
   $('#btn-spelling-reset').addEventListener('click', resetSpellingSelection);
 

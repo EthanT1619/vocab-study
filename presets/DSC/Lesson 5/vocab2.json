@@ -1,14 +1,14 @@
 [
-  { "word": "follow - followed", "korean": "따라가다", "english": "", "example": "" },
+  { "word": "follow - followed", "korean": "따라가다/따라갔다", "english": "", "example": "" },
   { "word": "sick", "korean": "아픈", "english": "", "example": "" },
-  { "word": "hurt - hurt", "korean": "다치게 하다", "english": "", "example": "" },
+  { "word": "hurt - hurt", "korean": "다치게 하다/다치게 했다", "english": "", "example": "" },
   { "word": "close", "korean": "가까운", "english": "", "example": "" },
-  { "word": "bring - brought", "korean": "가져오다", "english": "", "example": "" },
-  { "word": "worry - worried", "korean": "걱정하다", "english": "", "example": "" },
-  { "word": "look for - looked for", "korean": "~를 찾다", "english": "", "example": "" },
+  { "word": "bring - brought", "korean": "가져오다/가져왔다", "english": "", "example": "" },
+  { "word": "worry - worried", "korean": "걱정하다/걱정했다", "english": "", "example": "" },
+  { "word": "look for - looked for", "korean": "~를 찾다/~를 찾았다", "english": "", "example": "" },
   { "word": "cupboard", "korean": "찬장, 벽장", "english": "", "example": "" },
-  { "word": "tie up - tied up", "korean": "묶다", "english": "", "example": "" },
-  { "word": "untie - untied", "korean": "풀다", "english": "", "example": "" },
-  { "word": "hit - hit", "korean": "때리다", "english": "", "example": "" },
-  { "word": "learn - learned", "korean": "배우다", "english": "", "example": "" }
+  { "word": "tie up - tied up", "korean": "묶다/묶었다", "english": "", "example": "" },
+  { "word": "untie - untied", "korean": "풀다/풀었다", "english": "", "example": "" },
+  { "word": "hit - hit", "korean": "때리다/때렸다", "english": "", "example": "" },
+  { "word": "learn - learned", "korean": "배우다/배웠다", "english": "", "example": "" }
 ]

@@ -650,6 +650,31 @@ body::before {
   color: var(--text-muted);
 }
 
+.spelling-hint-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-speak-word {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-speak-word:hover {
+  background: #eef2ff;
+  border-color: var(--primary);
+}
+
 .spelling-hint strong {
   color: var(--text);
 }
