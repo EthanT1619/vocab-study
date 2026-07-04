@@ -1,14 +1,74 @@
 [
-  { "word": "hood", "korean": "(외투에 달린) 모자", "english": "", "example": "" },
-  { "word": "basket", "korean": "바구니", "english": "", "example": "" },
-  { "word": "forest", "korean": "숲", "english": "", "example": "" },
-  { "word": "next to", "korean": "바로 옆", "english": "", "example": "" },
-  { "word": "pick - picked", "korean": "꺾다/꺾었다", "english": "", "example": "" },
-  { "word": "loud", "korean": "소리가 큰, 시끄러운", "english": "", "example": "" },
-  { "word": "sneeze", "korean": "재채기", "english": "", "example": "" },
-  { "word": "stranger", "korean": "낯선 사람", "english": "", "example": "" },
-  { "word": "allergic", "korean": "알레르기가 있는", "english": "", "example": "" },
-  { "word": "interesting", "korean": "흥미로운", "english": "", "example": "" },
-  { "word": "show - showed", "korean": "보여주다", "english": "", "example": "" },
-  { "word": "sand", "korean": "모래", "english": "", "example": "" }
+    {
+        "word":  "hood",
+        "korean":  "(외투에 달린) 모자",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "basket",
+        "korean":  "바구니",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "forest",
+        "korean":  "숲",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "next to",
+        "korean":  "바로 옆",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "pick - picked",
+        "korean":  "꺾다",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "loud",
+        "korean":  "소리가 큰, 시끄러운",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "sneeze",
+        "korean":  "재채기",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "stranger",
+        "korean":  "낯선 사람",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "allergic",
+        "korean":  "알레르기가 있는",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "interesting",
+        "korean":  "흥미로운",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "show - showed",
+        "korean":  "보여주다",
+        "english":  "",
+        "example":  ""
+    },
+    {
+        "word":  "sand",
+        "korean":  "모래",
+        "english":  "",
+        "example":  ""
+    }
 ]
