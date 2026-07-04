@@ -1,0 +1,68 @@
+[
+    {
+        "word":  "영어 단어",
+        "korean":  "한글 뜻",
+        "english":  "영어 뜻",
+        "example":  "영어 문장"
+    },
+    {
+        "word":  "spend - spent",
+        "korean":  "시간을 보내다",
+        "english":  "v. to allow time to pass",
+        "example":  "She spent most of her day in her room."
+    },
+    {
+        "word":  "represent - represented",
+        "korean":  "표현하다",
+        "english":  "v. to be a sign or symbol of something",
+        "example":  "She only used dark colors like brown, black, and gray; colors that represented her mood."
+    },
+    {
+        "word":  "forget - forgot",
+        "korean":  "잊다",
+        "english":  "v. to be unable to think of or remember",
+        "example":  "They all forgot about me."
+    },
+    {
+        "word":  "reach - reached",
+        "korean":  "~에 이르다, 도착하다",
+        "english":  "v. to arrive at a place",
+        "example":  "When they reached the soccer field, the weather had changed and it began to rain."
+    },
+    {
+        "word":  "shiver - shivered",
+        "korean":  "몸을 떨다",
+        "english":  "v. to shake from being cold or scared",
+        "example":  "The wind blew cold air from the north, and Emma began to shiver."
+    },
+    {
+        "word":  "score - scored",
+        "korean":  "득점하다",
+        "english":  "v. to get points or goals in a game",
+        "example":  "Watching her brother play soccer was boring even though his team won, and he scored two goals."
+    },
+    {
+        "word":  "miserable",
+        "korean":  "비참한",
+        "english":  "adj. very unhappy",
+        "example":  "Emma felt miserable and wet."
+    },
+    {
+        "word":  "cross - crossed",
+        "korean":  "가로지르다",
+        "english":  "v. to go across something",
+        "example":  "Emma and her parents crossed the wet, slippery soccer field."
+    },
+    {
+        "word":  "puddle",
+        "korean":  "웅덩이",
+        "english":  "n. a small amount of water on the ground",
+        "example":  "Emma slipped and landed in a puddle of dirty, muddy water."
+    },
+    {
+        "word":  "cover - covered",
+        "korean":  "뒤덮다",
+        "english":  "v. to be spread over something",
+        "example":  "She was covered in mud"
+    }
+]

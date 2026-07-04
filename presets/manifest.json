@@ -60,12 +60,20 @@
                        "name":  "LSA",
                        "lessons":  [
                                        {
-                                           "id":  "lesson-2",
-                                           "name":  "Lesson 2",
+                                           "id":  "lesson-6",
+                                           "name":  "Lesson 6",
                                            "lists":  [
                                                          {
                                                              "name":  "Vocab 4",
-                                                             "file":  "LSA/Lesson 2/vocab4.json"
+                                                             "file":  "LSA/Lesson 6/vocab4.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 5",
+                                                             "file":  "LSA/Lesson 6/vocab5.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 6",
+                                                             "file":  "LSA/Lesson 6/vocab6.json"
                                                          }
                                                      ]
                                        }

@@ -1,0 +1,68 @@
+[
+    {
+        "word":  "영어 단어",
+        "korean":  "한글 뜻",
+        "english":  "영어 뜻",
+        "example":  "영어 문장"
+    },
+    {
+        "word":  "skip - skipped",
+        "korean":  "건너뛰다",
+        "english":  "v. to pass over",
+        "example":  "They skipped my birthday!"
+    },
+    {
+        "word":  "ignore - ignored",
+        "korean":  "무시하다",
+        "english":  "v. to do nothing about something",
+        "example":  "Everyone had ignored her birthday, so she was going to ignore everyone"
+    },
+    {
+        "word":  "push - pushed",
+        "korean":  "밀다",
+        "english":  "v. to press against something with force",
+        "example":  "She walked past Michael and pushed him aside."
+    },
+    {
+        "word":  "coldly",
+        "korean":  "차갑게",
+        "english":  "adv. in an unfriendly manner",
+        "example":  "\"You!\" Emma replied coldly."
+    },
+    {
+        "word":  "keep - kept",
+        "korean":  "계속하다",
+        "english":  "v. to continue doing something",
+        "example":  "Emma kept on walking."
+    },
+    {
+        "word":  "without",
+        "korean":  "~없이, ~하지않고",
+        "english":  "prep. not doing anything",
+        "example":  "She sat down at the table and had the delicious snack without saying a word to Mom."
+    },
+    {
+        "word":  "leave - left",
+        "korean":  "떠나다",
+        "english":  "v. to go away from a place",
+        "example":  "Emma replied with her mouth full as she left the kitchen without clearing the table."
+    },
+    {
+        "word":  "clear - cleared",
+        "korean":  "치우다",
+        "english":  "v. to remove something from an area",
+        "example":  "No one cleared the room before someone pointed it out."
+    },
+    {
+        "word":  "straight",
+        "korean":  "곧장, 바로",
+        "english":  "adv. directly or immediately",
+        "example":  "She went straight up to her room without saying good night to anyone."
+    },
+    {
+        "word":  "curl - curled",
+        "korean":  "(몸을) 웅크리다",
+        "english":  "v. to make your body into a round or curved shape",
+        "example":  "She curled up under her blanket and started to cry."
+    }
+]
