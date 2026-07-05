@@ -495,8 +495,15 @@ function applyWordSet(wordList, options = {}) {
     return false;
   }
 
-  fields = options.fields ? { ...options.fields } : inferFieldsFromWords(normalized);
-  words = normalized;
+  const append = options.append === true;
+  const merged = append ? [...words, ...normalized] : normalized;
+
+  fields = options.fields ? { ...options.fields } : inferFieldsFromWords(merged);
+  words = merged;
+
+  if (!append) {
+    builtInLoadedFiles.clear();
+  }
 
   if (options.timerEnabled !== undefined) timerEnabled = options.timerEnabled;
   if (options.timerSeconds !== undefined) timerSeconds = options.timerSeconds;
@@ -511,16 +518,17 @@ function applyWordSet(wordList, options = {}) {
 
   updateFieldVisibility();
   renderWordList();
-  return true;
+  return normalized.length;
 }
 
 let builtInLevels = [];
 let builtInBrowseLevel = null;
 let builtInBrowseLesson = null;
+let builtInLoadedFiles = new Set();
 
 function getBuiltInLoadItems(lesson) {
   if (lesson?.lists?.length) return lesson.lists;
-  if (lesson?.file) return [lesson];
+  if (lesson?.file) return [{ ...lesson, name: lesson.name || 'Words' }];
   return [];
 }
 
@@ -589,15 +597,19 @@ function renderBuiltInBrowser() {
       return;
     }
 
-    container.innerHTML = items.map((entry, i) => `
+    container.innerHTML = items.map((entry, i) => {
+      const loaded = builtInLoadedFiles.has(entry.file);
+      return `
       <div class="builtin-preset-item">
         <div class="builtin-preset-item-info">
           <div class="builtin-preset-item-name">${escapeHtml(entry.name)}</div>
           ${entry.description ? `<div class="builtin-preset-item-meta">${escapeHtml(entry.description)}</div>` : ''}
         </div>
-        <button type="button" class="btn btn-secondary btn-small" data-list-idx="${i}">불러오기</button>
-      </div>
-    `).join('');
+        <button type="button" class="btn btn-secondary btn-small" data-list-idx="${i}" ${loaded ? 'disabled' : ''}>
+          ${loaded ? '추가됨' : '불러오기'}
+        </button>
+      </div>`;
+    }).join('');
 
     container.querySelectorAll('[data-list-idx]').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -636,7 +648,7 @@ function renderBuiltInBrowser() {
         renderBuiltInBrowser();
         return;
       }
-      loadBuiltInPreset(lesson);
+      loadBuiltInPreset({ ...lesson, name: lesson.name || 'Words' });
     });
   });
 }
@@ -661,6 +673,11 @@ async function loadBuiltInManifest() {
 async function loadBuiltInPreset(entry) {
   if (!entry?.file) return;
 
+  if (builtInLoadedFiles.has(entry.file)) {
+    showToast(`"${entry.name}"은(는) 이미 추가되었습니다.`, 'info');
+    return;
+  }
+
   try {
     const res = await fetch(`${PRESETS_BASE}${entry.file}`);
     if (!res.ok) throw new Error('preset file not found');
@@ -669,14 +686,18 @@ async function loadBuiltInPreset(entry) {
     if (!Array.isArray(wordList)) throw new Error('invalid preset format');
 
     const options = {
+      append: true,
       presetName: '',
-      timerEnabled: entry.timerEnabled,
-      timerSeconds: entry.timerSeconds,
     };
     if (entry.fields) options.fields = entry.fields;
+    if (entry.timerEnabled !== undefined) options.timerEnabled = entry.timerEnabled;
+    if (entry.timerSeconds !== undefined) options.timerSeconds = entry.timerSeconds;
 
-    if (applyWordSet(wordList, options)) {
-      showToast(`"${entry.name}" 단어 목록을 불러왔습니다.`, 'success');
+    const added = applyWordSet(wordList, options);
+    if (added) {
+      builtInLoadedFiles.add(entry.file);
+      showToast(`"${entry.name}" ${added}개 추가 (총 ${words.length}개)`, 'success');
+      if (builtInBrowseLesson) renderBuiltInBrowser();
     }
   } catch {
     showToast(`"${entry.name}" 목록을 불러오지 못했습니다.`, 'error');
@@ -1247,7 +1268,9 @@ function init() {
     if (words.length === 0) return;
     if (confirm('모든 단어를 삭제할까요?')) {
       words = [];
+      builtInLoadedFiles.clear();
       renderWordList();
+      if (builtInBrowseLesson) renderBuiltInBrowser();
     }
   });
 

@@ -6,8 +6,24 @@ $Root = Split-Path $PSScriptRoot -Parent
 $SourceRoot = Join-Path $Root 'presets-source'
 $OutRoot = Join-Path $Root 'presets'
 
-$SkipWordValues = @('words', 'word', 'english', 'example', 'korean')
+$SkipWordValues = @('words', 'word', 'english', 'example', 'korean', 'no', 'no.')
 $SkipWordPatterns = @('^Vocab\s*\d+$', '^Lesson\s*\d+$')
+
+function Test-HasLatinLetter([string]$Text) {
+  return $Text -match '[A-Za-z]'
+}
+
+function Test-SkipWord([string]$Word) {
+  $trimmed = if ($Word) { $Word.Trim() } else { '' }
+  if (-not $trimmed) { return $true }
+  # B column must contain English letters (skips header rows and row numbers)
+  if (-not (Test-HasLatinLetter $trimmed)) { return $true }
+  if ($SkipWordValues -contains $trimmed.ToLower()) { return $true }
+  foreach ($pattern in $SkipWordPatterns) {
+    if ($trimmed -match $pattern) { return $true }
+  }
+  return $false
+}
 
 function Get-SharedStrings([string]$SharedStringsPath) {
   [xml]$xml = Get-Content -Path $SharedStringsPath -Encoding UTF8
@@ -44,16 +60,6 @@ function Get-CellText($cell, [string[]]$SharedStrings) {
     return [string]$cell.v
   }
   return ''
-}
-
-function Test-SkipWord([string]$Word) {
-  $trimmed = if ($Word) { $Word.Trim() } else { '' }
-  if (-not $trimmed) { return $true }
-  if ($SkipWordValues -contains $trimmed.ToLower()) { return $true }
-  foreach ($pattern in $SkipWordPatterns) {
-    if ($trimmed -match $pattern) { return $true }
-  }
-  return $false
 }
 
 function Convert-XlsxFile([string]$XlsxPath) {

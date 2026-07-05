@@ -1,11 +1,5 @@
 [
     {
-        "word":  "영어 단어",
-        "korean":  "한글 뜻",
-        "english":  "영어 뜻",
-        "example":  "영어 문장"
-    },
-    {
         "word":  "suddenly",
         "korean":  "갑자기",
         "english":  "adv. happening very quickly in an unexpected way",
