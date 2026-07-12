@@ -48,17 +48,56 @@
                                        {
                                            "id":  "lesson-2",
                                            "name":  "Lesson 2",
-                                           "file":  "DSC/Lesson 2/words.json"
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSC/Lesson 2/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSC/Lesson 2/vocab2.json"
+                                                         },
+                                                         {
+                                                             "name":  "Words",
+                                                             "file":  "DSC/Lesson 2/words.json"
+                                                         }
+                                                     ]
                                        },
                                        {
                                            "id":  "lesson-3",
                                            "name":  "Lesson 3",
-                                           "file":  "DSC/Lesson 3/words.json"
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSC/Lesson 3/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSC/Lesson 3/vocab2.json"
+                                                         },
+                                                         {
+                                                             "name":  "Words",
+                                                             "file":  "DSC/Lesson 3/words.json"
+                                                         }
+                                                     ]
                                        },
                                        {
                                            "id":  "lesson-4",
                                            "name":  "Lesson 4",
-                                           "file":  "DSC/Lesson 4/words.json"
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSC/Lesson 4/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSC/Lesson 4/vocab2.json"
+                                                         },
+                                                         {
+                                                             "name":  "Words",
+                                                             "file":  "DSC/Lesson 4/words.json"
+                                                         }
+                                                     ]
                                        },
                                        {
                                            "id":  "lesson-5",
