@@ -1,1 +1,62 @@
-
+[
+    {
+        "word":  "topic",
+        "korean":  "주제",
+        "english":  "n. something that people talk or write about",
+        "example":  "Miss Gwen wrote a topic on the board and faced the class."
+    },
+    {
+        "word":  "brainstorm - brainstormed",
+        "korean":  "아이디어를 내다",
+        "english":  "v. to discuss ideas as a group",
+        "example":  "Now, let\u0027s brainstorm ideas."
+    },
+    {
+        "word":  "raise - raised",
+        "korean":  "들다",
+        "english":  "v. to move something to a higher position",
+        "example":  "All hands were raised except Jimmy\u0027s."
+    },
+    {
+        "word":  "giggle",
+        "korean":  "키득거림",
+        "english":  "n. a silly or nervous laugh",
+        "example":  "\"He can do it really well,\" said Eric with a giggle."
+    },
+    {
+        "word":  "cheat - cheated",
+        "korean":  "부정행위를 하다",
+        "english":  "v. to use unfair or dishonest methods to gain an advantage",
+        "example":  "I can learn to cheat on tests like Eric."
+    },
+    {
+        "word":  "concentrate - concentrated",
+        "korean":  "집중하다",
+        "english":  "v. to focus your attention",
+        "example":  "He concentrated on brainstorming more ideas."
+    },
+    {
+        "word":  "bang - banged",
+        "korean":  "쿵 하고 부딪히다",
+        "english":  "v. to beat or strike with a loud noise",
+        "example":  "He seemed to have banged his head on the wall."
+    },
+    {
+        "word":  "ceiling",
+        "korean":  "천장",
+        "english":  "n. the inside surface at the top of a room",
+        "example":  "It was not the wall, it was the ceiling!"
+    },
+    {
+        "word":  "float - floated",
+        "korean":  "(물이나 공중에서) 떠가다",
+        "english":  "v. to move in the air",
+        "example":  "It was a ballon, it was floating."
+    },
+    {
+        "word":  "jerk - jerked",
+        "korean":  "홱 움직이다",
+        "english":  "v. to move something with a sharp, quick motion",
+        "example":  "He tried to jerk his head this way and that."
+    }
+]

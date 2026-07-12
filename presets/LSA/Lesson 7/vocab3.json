@@ -1,1 +1,62 @@
-
+[
+    {
+        "word":  "puzzled",
+        "korean":  "어리둥절해 하는",
+        "english":  "adj. confused",
+        "example":  "He passed by puzzled birds as he flew up toward the clouds."
+    },
+    {
+        "word":  "neighborhood",
+        "korean":  "동네, 이웃",
+        "english":  "n. a section of a town or city",
+        "example":  "He lost sight of the streets and the trees and the whole neighborhood."
+    },
+    {
+        "word":  "zap - zapped",
+        "korean":  "재빨리 움직이다",
+        "english":  "v. to move quickly or suddenly",
+        "example":  "He thought he might be zapped into a black hole or bump into a satellite."
+    },
+    {
+        "word":  "midair",
+        "korean":  "공중",
+        "english":  "n. any point in the air",
+        "example":  "Jimmy was flying in midair."
+    },
+    {
+        "word":  "surround - surrounded",
+        "korean":  "둘러싸다",
+        "english":  "v. to be on every side of someone or something",
+        "example":  "He was surrounded by white clouds."
+    },
+    {
+        "word":  "croak - croaked",
+        "korean":  "(목이 쉰 듯) 말하다",
+        "english":  "v. to say something in a rough, low voice",
+        "example":  "\"W... What?\" Jimmy croaked."
+    },
+    {
+        "word":  "beard",
+        "korean":  "(턱) 수염",
+        "english":  "n. the hair that grows on a man\u0027s cheeks and chin",
+        "example":  "\"Hey! What are you doing here, young man?\" asked one of the men with a long beard."
+    },
+    {
+        "word":  "mumble - mumbled",
+        "korean":  "중얼거리다",
+        "english":  "v. to say something in a quiet, unclear voice",
+        "example":  "\"I... I don\u0027t know,\" mumbled Jimmy."
+    },
+    {
+        "word":  "storm",
+        "korean":  "폭풍",
+        "english":  "n. bad weather in which there is a lot of rain, snow, etc.",
+        "example":  "\"I can hear the storm in your head,\" the bearded man said."
+    },
+    {
+        "word":  "exclaim - exclaimed",
+        "korean":  "소리치다",
+        "english":  "v. to cry out suddenly",
+        "example":  "\"Boy, isn\u0027t that noisy!\" exclaimed the other man."
+    }
+]
