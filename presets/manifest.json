@@ -45,6 +45,34 @@
                                                              "file":  "DSC/Lesson 6/vocab2.json"
                                                          }
                                                      ]
+                                       },
+                                       {
+                                           "id":  "lesson-7",
+                                           "name":  "Lesson 7",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSC/Lesson 7/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSC/Lesson 7/vocab2.json"
+                                                         }
+                                                     ]
+                                       },
+                                       {
+                                           "id":  "lesson-19",
+                                           "name":  "Lesson 19",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSC/Lesson 19/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSC/Lesson 19/vocab2.json"
+                                                         }
+                                                     ]
                                        }
                                    ]
                    },
@@ -74,6 +102,24 @@
                                                          {
                                                              "name":  "Vocab 6",
                                                              "file":  "LSA/Lesson 6/vocab6.json"
+                                                         }
+                                                     ]
+                                       },
+                                       {
+                                           "id":  "lesson-7",
+                                           "name":  "Lesson 7",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "LSA/Lesson 7/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "LSA/Lesson 7/vocab2.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 3",
+                                                             "file":  "LSA/Lesson 7/vocab3.json"
                                                          }
                                                      ]
                                        }
