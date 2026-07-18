@@ -24,6 +24,148 @@
                                                              "file":  "DSB/Lesson 1/vocab2.json"
                                                          }
                                                      ]
+                                       },
+                                       {
+                                           "id":  "lesson-2",
+                                           "name":  "Lesson 2",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSB/Lesson 2/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSB/Lesson 2/vocab2.json"
+                                                         }
+                                                     ]
+                                       },
+                                       {
+                                           "id":  "lesson-3",
+                                           "name":  "Lesson 3",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSB/Lesson 3/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSB/Lesson 3/vocab2.json"
+                                                         }
+                                                     ]
+                                       },
+                                       {
+                                           "id":  "lesson-4",
+                                           "name":  "Lesson 4",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 1",
+                                                             "file":  "DSB/Lesson 4/vocab1.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 2",
+                                                             "file":  "DSB/Lesson 4/vocab2.json"
+                                                         }
+                                                     ]
+                                       },
+                                       {
+                                           "id":  "lesson-5",
+                                           "name":  "Lesson 5",
+                                           "file":  "DSB/Lesson 5/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-6",
+                                           "name":  "Lesson 6",
+                                           "file":  "DSB/Lesson 6/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-7",
+                                           "name":  "Lesson 7",
+                                           "file":  "DSB/Lesson 7/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-8",
+                                           "name":  "Lesson 8",
+                                           "file":  "DSB/Lesson 8/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-9",
+                                           "name":  "Lesson 9",
+                                           "file":  "DSB/Lesson 9/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-10",
+                                           "name":  "Lesson 10",
+                                           "file":  "DSB/Lesson 10/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-11",
+                                           "name":  "Lesson 11",
+                                           "file":  "DSB/Lesson 11/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-12",
+                                           "name":  "Lesson 12",
+                                           "file":  "DSB/Lesson 12/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-13",
+                                           "name":  "Lesson 13",
+                                           "file":  "DSB/Lesson 13/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-14",
+                                           "name":  "Lesson 14",
+                                           "file":  "DSB/Lesson 14/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-15",
+                                           "name":  "Lesson 15",
+                                           "file":  "DSB/Lesson 15/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-16",
+                                           "name":  "Lesson 16",
+                                           "file":  "DSB/Lesson 16/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-17",
+                                           "name":  "Lesson 17",
+                                           "file":  "DSB/Lesson 17/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-18",
+                                           "name":  "Lesson 18",
+                                           "file":  "DSB/Lesson 18/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-19",
+                                           "name":  "Lesson 19",
+                                           "file":  "DSB/Lesson 19/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-20",
+                                           "name":  "Lesson 20",
+                                           "file":  "DSB/Lesson 20/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-21",
+                                           "name":  "Lesson 21",
+                                           "file":  "DSB/Lesson 21/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-22",
+                                           "name":  "Lesson 22",
+                                           "file":  "DSB/Lesson 22/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-23",
+                                           "name":  "Lesson 23",
+                                           "file":  "DSB/Lesson 23/words.json"
+                                       },
+                                       {
+                                           "id":  "lesson-24",
+                                           "name":  "Lesson 24",
+                                           "file":  "DSB/Lesson 24/words.json"
                                        }
                                    ]
                    },
@@ -425,6 +567,24 @@
                                                          {
                                                              "name":  "Vocab 3",
                                                              "file":  "LSA/Lesson 7/vocab3.json"
+                                                         }
+                                                     ]
+                                       },
+                                       {
+                                           "id":  "lesson-8",
+                                           "name":  "Lesson 8",
+                                           "lists":  [
+                                                         {
+                                                             "name":  "Vocab 4",
+                                                             "file":  "LSA/Lesson 8/vocab4.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 5",
+                                                             "file":  "LSA/Lesson 8/vocab5.json"
+                                                         },
+                                                         {
+                                                             "name":  "Vocab 6",
+                                                             "file":  "LSA/Lesson 8/vocab6.json"
                                                          }
                                                      ]
                                        }
